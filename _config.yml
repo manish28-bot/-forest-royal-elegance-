@@ -1,0 +1,25 @@
+# _config.yml for Forest Royal Elegance GitHub Pages site
+
+# Basic settings
+title: Forest Royal Elegance
+description: A beautiful, interactive website with nature-inspired royal elegance theme
+baseurl: "/forest-royal-elegance" # the subpath of your site, e.g. /blog
+url: "https://your-username.github.io" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+theme: minimal # Using a minimal theme since our site is primarily HTML/CSS/JS
+
+# Exclude these files from processing
+exclude:
+  - README.md
+  - LICENSE
+  - docs/
+  - .gitignore
+
+# Plugins (empty since we're not using Jekyll plugins)
+plugins: []
+
+# Custom variables
+name: "Forest Royal Elegance"
+github_username: "your-username"
