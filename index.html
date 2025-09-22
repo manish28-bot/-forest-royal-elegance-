@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Royal Elegance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;500&display=swap">
+    <style>
+        /* Base font size for rem calculations (1rem = 10px for easier math) */
+        html {
+            font-size: 62.5%; /* 10px based on default 16px */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a1f0a;
+            --bg-secondary: #142814;
+            --text-primary: #f0f8f0;
+            --accent: #8bc34a;
+            --accent-dark: #689f38;
+            --card-bg: rgba(20, 40, 20, 0.7);
+            --header-bg: rgba(10, 31, 10, 0.8);
+            --border-color: rgba(139, 195, 74, 0.3);
+            --badge-gold: #ffd700;
+            --badge-silver: #c0c0c0;
+            --badge-bronze: #cd7f32;
+            
+            /* Responsive spacing variables */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 3rem;
+            --space-xl: 4rem;
+            
+            /* Responsive font sizes */
+            --text-xs: 1.2rem;
+            --text-sm: 1.4rem;
+            --text-md: 1.6rem;
+            --text-lg: 1.8rem;
+            --text-xl: 2.4rem;
+            --text-2xl: 3.2rem;
+            --text-3xl: 4rem;
+            --text-4xl: 4.8rem;
+        }
+
+        body.light-mode {
+            --bg-primary: #e8f5e9;
+            --bg-secondary: #c8e6c9;
+            --text-primary: #1b5e20;
+            --accent: #388e3c;
+            --accent-dark: #2e7d32;
+            --card-bg: rgba(200, 230, 201, 0.7);
+            --header-bg: rgba(232, 245, 233, 0.9);
+            --border-color: rgba(56, 142, 60, 0.3);
+            --badge-gold: #daa520;
+            --badge-silver: #a9a9a9;
+            --badge-bronze: #b87333;
+            background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: var(--text-md);
+            background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .container {
+            max-width: 120rem; /* 1200px */
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+            width: 100%;
+        }
+
+        /* NEW: Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 0.4rem; /* 4px */
+            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            z-index: 10000;
+            transition: width 0.2s ease;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 3rem; /* 30px */
+            right: 3rem; /* 30px */
+            z-index: 1001;
+            width: 5rem; /* 50px */
+            height: 5rem; /* 50px */
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(1rem);
+            padding: var(--space-md) 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 0.1rem solid var(--border-color);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: var(--text-2xl); /* 3.2rem */
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.5s ease;
+        }
+
+        .logo i {
+            margin-right: var(--space-sm);
+            color: var(--accent);
+            transition: color 0.5s ease;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: var(--space-lg); /* 30px */
+        }
+
+        nav ul li a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: var(--text-lg); /* 1.8rem */
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 0;
+            height: 0.2rem;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        /* NEW: Achievement Badges */
+        .achievement-badge {
+            position: fixed;
+            bottom: 3rem; /* 30px */
+            left: 3rem; /* 30px */
+            width: 6rem; /* 60px */
+            height: 6rem; /* 60px */
+            border-radius: 50%;
+            background: var(--card-bg);
+            backdrop-filter: blur(1rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: 0.1rem solid var(--border-color);
+        }
+
+        .achievement-badge:hover {
+            transform: scale(1.1);
+        }
+
+        .achievement-badge i {
+            font-size: var(--text-xl); /* 2.4rem */
+            color: var(--accent);
+        }
+
+        .badge-count {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xs);
+            font-weight: bold;
+        }
+
+        .badges-panel {
+            position: fixed;
+            bottom: 10rem; /* 100px */
+            left: 3rem; /* 30px */
+            background: var(--card-bg);
+            backdrop-filter: blur(1rem);
+            border-radius: 1.5rem;
+            padding: var(--space-md);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+            border: 0.1rem solid var(--border-color);
+            z-index: 998;
+            width: 30rem;
+            transform: translateY(2rem);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .badges-panel.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .badges-panel h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            margin-bottom: var(--space-md);
+            text-align: center;
+            font-size: var(--text-xl);
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm);
+            border-radius: 1rem;
+            background: rgba(139, 195, 74, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .badge-item.unlocked {
+            background: rgba(139, 195, 74, 0.2);
+        }
+
+        .badge-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--space-md);
+            color: var(--bg-primary);
+        }
+
+        .badge-info {
+            flex: 1;
+        }
+
+        .badge-info h4 {
+            font-family: 'Cinzel', serif;
+            font-size: var(--text-md);
+            margin-bottom: var(--space-xs);
+        }
+
+        .badge-info p {
+            font-size: var(--text-sm);
+            opacity: 0.8;
+        }
+
+        .badge-status {
+            font-size: var(--text-xl);
+            color: var(--accent);
+        }
+
+        .badge-item.locked .badge-status {
+            color: rgba(139, 195, 74, 0.3);
+        }
+
+        /* NEW: Achievement Toast Notification */
+        .achievement-toast {
+            position: fixed;
+            top: 10rem; /* 100px */
+            right: 3rem; /* 30px */
+            background: var(--card-bg);
+            backdrop-filter: blur(1rem);
+            border-radius: 1rem;
+            padding: var(--space-md) var(--space-lg);
+            box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+            border: 0.1rem solid var(--border-color);
+            display: flex;
+            align-items: center;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 10000;
+            max-width: 35rem;
+        }
+
+        .achievement-toast.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--space-md);
+            color: var(--bg-primary);
+            font-size: var(--text-lg);
+        }
+
+        .toast-content h4 {
+            font-family: 'Cinzel', serif;
+            font-size: var(--text-md);
+            margin-bottom: var(--space-xs);
+            color: var(--accent);
+        }
+
+        .toast-content p {
+            font-size: var(--text-sm);
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 10rem 0 5rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%238bc34a" opacity="0.1" d="M50,0 L60,40 L100,50 L60,60 L50,100 L40,60 L0,50 L40,40 Z" /></svg>');
+            background-size: 20rem;
+            opacity: 0.3;
+            background-attachment: fixed;
+            transition: background 0.5s ease;
+        }
+
+        body.light-mode .hero::before {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23388e3c" opacity="0.1" d="M50,0 L60,40 L100,50 L60,60 L50,100 L40,60 L0,50 L40,40 Z" /></svg>');
+            background-size: 20rem;
+            opacity: 0.3;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 80rem;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 8rem); /* Responsive font size */
+            margin-bottom: var(--space-lg);
+            color: var(--accent);
+            text-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
+            transition: color 0.5s ease;
+        }
+
+        .hero p {
+            font-size: clamp(1.6rem, 3vw, 2.4rem); /* Responsive font size */
+            margin-bottom: var(--space-xl);
+            color: var(--text-primary);
+            transition: color 0.5s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 5rem;
+            font-weight: 500;
+            font-size: var(--text-lg);
+            transition: all 0.3s ease;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.4);
+        }
+
+        /* NEW: Button Wiggle Animation */
+        .btn-wiggle {
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 7% { transform: rotateZ(0); }
+            15% { transform: rotateZ(-5deg); }
+            20% { transform: rotateZ(5deg); }
+            25% { transform: rotateZ(-5deg); }
+            30% { transform: rotateZ(3deg); }
+            35% { transform: rotateZ(-2deg); }
+            40%, 100% { transform: rotateZ(0); }
+        }
+
+        /* Pearl Threads */
+        .pearl-thread {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .thread {
+            stroke: var(--accent);
+            stroke-width: 0.2rem;
+            fill: none;
+            transition: stroke 0.5s ease;
+        }
+
+        .pearl {
+            fill: #ffffff;
+            stroke: var(--accent);
+            stroke-width: 0.1rem;
+            filter: url(#pearl-glow);
+            transition: stroke 0.5s ease;
+            cursor: pointer;
+        }
+
+        /* NEW: Pearl Shimmer Effect */
+        .pearl.shimmer {
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: url(#pearl-glow); }
+            50% { filter: url(#pearl-glow) brightness(1.5); }
+        }
+
+        /* NEW: Interactive Pearl Modal */
+        .pearl-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 31, 10, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .pearl-modal {
+            background: rgba(232, 245, 233, 0.9);
+        }
+
+        .pearl-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(1rem);
+            border-radius: 1.5rem;
+            padding: var(--space-xl);
+            max-width: 50rem;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border: 0.1rem solid var(--border-color);
+            box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.4);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .pearl-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: var(--text-xl);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal-icon {
+            font-size: var(--text-3xl);
+            color: var(--accent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .modal-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: var(--text-2xl);
+            color: var(--accent);
+            margin-bottom: var(--space-md);
+        }
+
+        .modal-content p {
+            margin-bottom: var(--space-lg);
+            font-size: var(--text-lg);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 10rem 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23142814" width="100" height="100"/><path fill="%238bc34a" opacity="0.05" d="M0,0 L100,100 M100,0 L0,100" stroke-width="1"/></svg>');
+            background-size: 10rem;
+            background-attachment: fixed;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        body.light-mode .features {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23c8e6c9" width="100" height="100"/><path fill="%23388e3c" opacity="0.05" d="M0,0 L100,100 M100,0 L0,100" stroke-width="1"/></svg>');
+            background-size: 10rem;
+            background-attachment: fixed;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.4rem, 5vw, 4.8rem); /* Responsive font size */
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1.5rem;
+            transition: color 0.5s ease;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10rem;
+            height: 0.3rem;
+            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            transition: background 0.5s ease;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(1rem);
+            border-radius: 1.5rem;
+            padding: var(--space-xl) var(--space-lg);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 0.1rem solid var(--border-color);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(5rem);
+            transition: opacity 0.8s ease, transform 0.8s ease, background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-1rem);
+            box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.3);
+            border-color: rgba(139, 195, 74, 0.4);
+        }
+
+        .feature-icon {
+            font-size: var(--text-3xl);
+            color: var(--accent);
+            margin-bottom: var(--space-lg);
+            transition: color 0.5s ease;
+        }
+
+        .feature-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-md);
+            color: var(--accent);
+            transition: color 0.5s ease;
+        }
+
+        .feature-card p {
+            color: var(--text-primary);
+            font-size: var(--text-md);
+            transition: color 0.5s ease;
+        }
+
+        /* Royal Gallery */
+        .gallery {
+            padding: 10rem 0;
+            background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            background-attachment: fixed;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 30rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10, 31, 10, 0.9), transparent);
+            padding: var(--space-md);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.light-mode .gallery-overlay {
+            background: linear-gradient(to top, rgba(232, 245, 233, 0.9), transparent);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            margin-bottom: var(--space-sm);
+            transition: color 0.5s ease;
+            font-size: var(--text-lg);
+        }
+
+        /* Royal Crest */
+        .royal-crest {
+            padding: 8rem 0;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%230a1f0a" width="100" height="100"/><path fill="%238bc34a" opacity="0.05" d="M50,0 Q70,40 100,50 Q70,60 50,100 Q30,60 0,50 Q30,40 50,0 Z" /></svg>');
+            background-size: 10rem;
+            background-attachment: fixed;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        body.light-mode .royal-crest {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23e8f5e9" width="100" height="100"/><path fill="%23388e3c" opacity="0.05" d="M50,0 Q70,40 100,50 Q70,60 50,100 Q30,60 0,50 Q30,40 50,0 Z" /></svg>');
+            background-size: 10rem;
+            background-attachment: fixed;
+        }
+
+        .crest {
+            width: 20rem;
+            height: 20rem;
+            margin: 0 auto 4rem;
+            background: linear-gradient(45deg, var(--accent), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-4xl);
+            color: var(--bg-primary);
+            box-shadow: 0 0 5rem rgba(139, 195, 74, 0.5);
+            position: relative;
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+            opacity: 0;
+            transform: scale(0.5) rotate(-180deg);
+        }
+
+        .crest.visible {
+            opacity: 1;
+            transform: scale(1) rotate(0);
+            transition: opacity 1s ease, transform 1s ease, background 0.5s ease;
+        }
+
+        .crest::before {
+            content: '';
+            position: absolute;
+            width: 22rem;
+            height: 22rem;
+            border: 0.2rem solid var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            transition: border-color 0.5s ease;
+        }
+
+        /* NEW: Social Feed Section */
+        .social-feed {
+            padding: 8rem 0;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .instagram-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .instagram-post {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            aspect-ratio: 1/1;
+        }
+
+        .instagram-post:hover {
+            transform: translateY(-0.5rem);
+        }
+
+        .instagram-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .instagram-post:hover img {
+            transform: scale(1.1);
+        }
+
+        .instagram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 31, 10, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.light-mode .instagram-overlay {
+            background: rgba(232, 245, 233, 0.7);
+        }
+
+        .instagram-post:hover .instagram-overlay {
+            opacity: 1;
+        }
+
+        .instagram-overlay i {
+            color: var(--text-primary);
+            font-size: var(--text-2xl);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-primary);
+            padding: 6rem 0 3rem;
+            border-top: 0.1rem solid var(--border-color);
+            position: relative;
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-column h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            margin-bottom: var(--space-lg);
+            font-size: var(--text-xl);
+            transition: color 0.5s ease;
+        }
+
+        .footer-column p, .footer-column li {
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            transition: color 0.5s ease;
+            font-size: var(--text-md);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-column ul li i {
+            color: var(--accent);
+            margin-right: var(--space-sm);
+            transition: color 0.5s ease;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            background: rgba(139, 195, 74, 0.1);
+            color: var(--accent);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: translateY(-0.5rem);
+        }
+
+        /* NEW: Expandable Footer Widgets */
+        .footer-widget {
+            margin-bottom: var(--space-lg);
+        }
+
+        .widget-title {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            margin-bottom: var(--space-md);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--text-lg);
+        }
+
+        .widget-title i {
+            transition: transform 0.3s ease;
+        }
+
+        .widget-title.active i {
+            transform: rotate(180deg);
+        }
+
+        .widget-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .widget-content.active {
+            max-height: 50rem;
+        }
+
+        /* NEW: Newsletter Subscription */
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .newsletter-input {
+            padding: 1.2rem 1.5rem;
+            border-radius: 5rem;
+            border: 0.1rem solid var(--border-color);
+            background: rgba(139, 195, 74, 0.1);
+            color: var(--text-primary);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: var(--text-md);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.3);
+        }
+
+        .newsletter-btn {
+            padding: 1.2rem 2rem;
+            border-radius: 5rem;
+            border: none;
+            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            color: var(--bg-primary);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: var(--text-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-0.3rem);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+        }
+
+        .newsletter-message {
+            margin-top: var(--space-sm);
+            padding: var(--space-sm);
+            border-radius: 0.5rem;
+            text-align: center;
+            display: none;
+            font-size: var(--text-sm);
+        }
+
+        .newsletter-success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+
+        .newsletter-error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+
+        /* NEW: Scroll-to-Top FAB */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 3rem;
+            right: 3rem;
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.4);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 0.1rem solid var(--border-color);
+            color: var(--text-primary);
+            font-size: var(--text-sm);
+            transition: color 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-1rem); }
+        }
+
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* NEW: Dynamic Gradient Backgrounds */
+        .dynamic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.5;
+            background: linear-gradient(45deg, var(--accent), var(--accent-dark), var(--bg-primary), var(--bg-secondary));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* NEW: SVG Morphing Animations */
+        .morphing-svg {
+            transition: all 0.5s ease;
+        }
+
+        .morph-animation {
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% { d: path("M150,0 Q180,150 150,300 Q120,450 150,600"); }
+            25% { d: path("M150,0 Q200,100 150,300 Q100,400 150,600"); }
+            50% { d: path("M150,0 Q170,200 150,300 Q130,400 150,600"); }
+            75% { d: path("M150,0 Q220,120 150,300 Q80,450 150,600"); }
+            100% { d: path("M150,0 Q180,150 150,300 Q120,450 150,600"); }
+        }
+
+        /* NEW: Enhanced Micro-animations */
+        .cursor-follow {
+            position: absolute;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.3;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .btn-bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translate3d(0,0,0);
+            }
+            40%, 43% {
+                transform: translate3d(0, -1.5rem, 0);
+            }
+            70% {
+                transform: translate3d(0, -0.7rem, 0);
+            }
+            90% {
+                transform: translate3d(0, -0.3rem, 0);
+            }
+        }
+
+        /* Responsive Design - Using em units for breakpoints */
+        @media (max-width: 48em) { /* 768px */
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: var(--space-md);
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 var(--space-sm) var(--space-sm);
+            }
+            
+            .hero h1 {
+                font-size: var(--text-3xl);
+            }
+            
+            .hero p {
+                font-size: var(--text-lg);
+            }
+            
+            .section-title h2 {
+                font-size: var(--text-2xl);
+            }
+
+            .pearl-thread {
+                display: none;
+            }
+            
+            .theme-toggle {
+                top: 1.5rem;
+                right: 1.5rem;
+                width: 4rem;
+                height: 4rem;
+            }
+
+            /* Hide cursor follow effect on mobile */
+            .cursor-follow {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .instagram-posts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .scroll-to-top {
+                bottom: 2rem;
+                right: 2rem;
+                width: 4rem;
+                height: 4rem;
+            }
+
+            .achievement-badge {
+                bottom: 2rem;
+                left: 2rem;
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .badges-panel {
+                bottom: 8rem;
+                left: 2rem;
+                width: calc(100% - 4rem);
+            }
+
+            .achievement-toast {
+                top: 8rem;
+                right: 2rem;
+                left: 2rem;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 30em) { /* 480px */
+            .instagram-posts {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 12rem 0 6rem;
+            }
+            
+            .hero h1 {
+                font-size: var(--text-2xl);
+            }
+            
+            .hero p {
+                font-size: var(--text-md);
+            }
+        }
+
+        /* High DPI screens adjustment */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .logo {
+                font-weight: 700; /* Bolder text for retina */
+            }
+            
+            nav ul li a {
+                font-weight: 500; /* Slightly bolder for better readability */
+            }
+        }
+
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .floating,
+            .btn-wiggle,
+            .morph-animation,
+            .shimmer {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Filters for Pearl Effects -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0" style="position:absolute;">
+        <defs>
+            <filter id="pearl-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- NEW: Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Dynamic Gradient Background -->
+    <div class="dynamic-bg"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- NEW: Achievement Badge -->
+    <div class="achievement-badge">
+        <i class="fas fa-trophy"></i>
+        <div class="badge-count">0</div>
+    </div>
+
+    <!-- NEW: Badges Panel -->
+    <div class="badges-panel">
+        <h3>Your Achievements</h3>
+        <div class="badge-item locked">
+            <div class="badge-icon">
+                <i class="fas fa-eye"></i>
+            </div>
+            <div class="badge-info">
+                <h4>Art Connoisseur</h4>
+                <p>View all gallery items</p>
+            </div>
+            <div class="badge-status">
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+        <div class="badge-item locked">
+            <div class="badge-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="badge-info">
+                <h4>Royal Explorer</h4>
+                <p>Click on 5 pearls</p>
+            </div>
+            <div class="badge-status">
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+        <div class="badge-item locked">
+            <div class="badge-icon">
+                <i class="fas fa-scroll"></i>
+            </div>
+            <div class="badge-info">
+                <h4>Scroll Master</h4>
+                <p>Scroll to the bottom of the page</p>
+            </div>
+            <div class="badge-status">
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Achievement Toast -->
+    <div class="achievement-toast">
+        <div class="toast-icon">
+            <i class="fas fa-trophy"></i>
+        </div>
+        <div class="toast-content">
+            <h4>Achievement Unlocked!</h4>
+            <p>You've unlocked a new achievement</p>
+        </div>
+    </div>
+
+    <!-- NEW: Pearl Modal -->
+    <div class="pearl-modal">
+        <div class="modal-content">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-icon">
+                <i class="fas fa-gem"></i>
+            </div>
+            <h3>Hidden Treasure</h3>
+            <p>You've discovered a hidden pearl! Each pearl contains a secret about our royal collections.</p>
+            <button class="btn">Learn More</button>
+        </div>
+    </div>
+
+    <!-- Cursor Follow Effect -->
+    <div class="cursor-follow"></div>
+
+    <!-- Scroll-to-Top FAB -->
+    <div class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Pearl Threads -->
+    <div class="pearl-thread" style="top: 8rem; left: 5%; width: 30%;">
+        <svg viewBox="0 0 300 600" preserveAspectRatio="xMinYMin slice">
+            <path class="thread morphing-svg morph-animation" d="M150,0 Q180,150 150,300 Q120,450 150,600" />
+            <circle class="pearl shimmer" cx="150" cy="0" r="8" data-content="The Forest Crown symbolizes the eternal connection between royalty and nature." />
+            <circle class="pearl shimmer" cx="180" cy="150" r="8" data-content="Our emeralds are sourced from sustainable mines in the deepest forests." />
+            <circle class="pearl shimmer" cx="150" cy="300" r="8" data-content="Each piece takes over 100 hours of meticulous craftsmanship to complete." />
+            <circle class="pearl shimmer" cx="120" cy="450" r="8" data-content="The Royal Oak collection is inspired by ancient forest guardians." />
+            <circle class="pearl shimmer" cx="150" cy="600" r="8" data-content="Our artisans undergo 10 years of training before creating their first royal piece." />
+        </svg>
+    </div>
+
+    <div class="pearl-thread" style="top: 10rem; right: 5%; width: 30%;">
+        <svg viewBox="0 0 300 600" preserveAspectRatio="xMaxYMin slice">
+            <path class="thread morphing-svg morph-animation" d="M150,0 Q120,150 150,300 Q180,450 150,600" />
+            <circle class="pearl shimmer" cx="150" cy="0" r="8" data-content="The pearl represents purity and is found in only 1% of our collections." />
+            <circle class="pearl shimmer" cx="120" cy="150" r="8" data-content="Our designs are inspired by patterns found in nature's geometry." />
+            <circle class="pearl shimmer" cx="150" cy="300" r="8" data-content="Each piece tells a story from the ancient royal forests." />
+            <circle class="pearl shimmer" cx="180" cy="450" r="8" data-content="The gold used in our pieces is 100% recycled and ethically sourced." />
+            <circle class="pearl shimmer" cx="150" cy="600" r="8" data-content="Our collections are displayed in museums across the world." />
+        </svg>
+    </div>
+
+    <div class="pearl-thread floating" style="bottom: 15rem; left: 10%; width: 20%;">
+        <svg viewBox="0 0 200 200" preserveAspectRatio="xMinYMin slice">
+            <path class="thread morphing-svg morph-animation" d="M100,0 Q150,50 100,100 Q50,150 100,200" />
+            <circle class="pearl shimmer" cx="100" cy="0" r="6" data-content="The Royal Elegance brand was established in 1852." />
+            <circle class="pearl shimmer" cx="150" cy="50" r="6" data-content="We plant a tree for every piece sold to honor our forest heritage." />
+            <circle class="pearl shimmer" cx="100" cy="100" r="6" data-content="Our master craftsmen come from generations of jewelers." />
+            <circle class="pearl shimmer" cx="50" cy="150" r="6" data-content="The emerald in our crown collection weighs over 50 carats." />
+            <circle class="pearl shimmer" cx="100" cy="200" r="6" data-content="Our designs have won international awards for sustainability." />
+        </svg>
+    </div>
+
+    <div class="pearl-thread floating" style="bottom: 10rem; right: 10%; width: 20%;">
+        <svg viewBox="0 0 200 200" preserveAspectRatio="xMaxYMin slice">
+            <path class="thread morphing-svg morph-animation" d="M100,0 Q50,50 100,100 Q150,150 100,200" />
+            <circle class="pearl shimmer" cx="100" cy="0" r="6" data-content="The royal family has been our patron for over a century." />
+            <circle class="pearl shimmer" cx="50" cy="50" r="6" data-content="Our collections feature in royal coronations and ceremonies." />
+            <circle class="pearl shimmer" cx="100" cy="100" r="6" data-content="Each piece is engraved with a hidden forest symbol." />
+            <circle class="pearl shimmer" cx="150" cy="150" r="6" data-content="We use traditional techniques combined with modern innovation." />
+            <circle class="pearl shimmer" cx="100" cy="200" r="6" data-content="Our jewelry is designed to last for generations." />
+        </svg>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-crown"></i> Royal Elegance
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Heritage</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Forest Royal Elegance</h1>
+            <p>Where nature's beauty meets royal sophistication</p>
+            <a href="#" class="btn btn-wiggle">Explore Our Heritage</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Royal Features</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Natural Craftsmanship</h3>
+                    <p>Each piece is inspired by nature and crafted with sustainable materials and techniques.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Forest Heritage</h3>
+                    <p>Our collections draw inspiration from the majesty of forests and the elegance of nature.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Eco-Luxury Materials</h3>
+                    <p>We use sustainable luxury materials that honor both nature and craftsmanship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Royal Collections</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect fill='%23355f35' width='300' height='300'/><circle fill='%238bc34a' cx='150' cy='150' r='80'/></svg>" alt="Forest Crown">
+                    <div class="gallery-overlay">
+                        <h3>Forest Crown</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect fill='%23142814' width='300' height'300'/><path fill='%238bc34a' d='M150,50 L200,150 L150,250 L100,150 Z'/></svg>" alt="Nature Scepter">
+                    <div class="gallery-overlay">
+                        <h3>Nature Scepter</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect fill='%23355f35' width='300' height='300'/><circle fill='%238bc34a' cx='150' cy='150' r='60'/><circle fill='%23142814' cx='150' cy='150' r='30'/></svg>" alt="Emerald Ring">
+                    <div class="gallery-overlay">
+                        <h3>Emerald Ring</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Royal Crest -->
+    <section class="royal-crest">
+        <div class="container">
+            <div class="crest">
+                <i class="fas fa-tree"></i>
+            </div>
+            <h2>The Forest Crest</h2>
+            <p>Symbolizing the harmony between royalty and nature's eternal beauty</p>
+        </div>
+    </section>
+
+    <!-- Social Feed Section -->
+    <section class="social-feed">
+        <div class="container">
+            <div class="section-title">
+                <h2>Follow Our Journey</h2>
+                <p>Discover our latest creations and behind-the-scenes moments</p>
+            </div>
+            <div class="instagram-posts">
+                <div class="instagram-post">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect fill='%23355f35' width='300' height='300'/><circle fill='%238bc34a' cx='150' cy='150' r='80'/></svg>" alt="Instagram Post">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300'><rect fill='%23142814' width='300' height='300'/><path fill='%238bc34a' d='M150,50 L200,150 L150,250 L100,150 Z'/></svg>" alt="Instagram Post">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect fill='%23355f35' width='300' height='300'/><circle fill='%238bc34a' cx='150' cy='150' r='60'/><circle fill='%23142814' cx='150' cy='150' r='30'/></svg>" alt="Instagram Post">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect fill='%23142814' width='300' height='300'/><polygon fill='%238bc34a' points='150,50 200,150 150,250 100,150'/></svg>" alt="Instagram Post">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Royal Elegance</h3>
+                    <p>Preserving the legacy of royal craftsmanship while honoring our natural world.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <!-- Expandable FAQ Widget -->
+                    <div class="footer-widget">
+                        <div class="widget-title">
+                            <h3>Frequently Asked Questions</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="widget-content">
+                            <ul>
+                                <li><i class="fas fa-question-circle"></i> How do I care for my jewelry?</li>
+                                <li><i class="fas fa-question-circle"></i> What is your return policy?</li>
+                                <li><i class="fas fa-question-circle"></i> Do you offer custom designs?</li>
+                                <li><i class="fas fa-question-circle"></i> How long does shipping take?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Expandable Collections Widget -->
+                    <div class="footer-widget">
+                        <div class="widget-title">
+                            <h3>Our Collections</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="widget-content">
+                            <ul>
+                                <li><i class="fas fa-crown"></i> Forest Crown Collection</li>
+                                <li><i class="fas fa-gem"></i> Emerald Essence</li>
+                                <li><i class="fas fa-leaf"></i> Nature's Whisper</li>
+                                <li><i class="fas fa-tree"></i> Royal Oak Series</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 1 Royal Forest, Nature's Avenue</li>
+                        <li><i class="fas fa-phone"></i> +1 (777) 888-9999</li>
+                        <li><i class="fas fa-envelope"></i> info@royalelegance.com</li>
+                    </ul>
+                    
+                    <!-- Newsletter Subscription -->
+                    <div class="newsletter">
+                        <h3>Subscribe to Our Newsletter</h3>
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                            <button type="submit" class="newsletter-btn">Subscribe</button>
+                            <div class="newsletter-message newsletter-success">Thank you for subscribing!</div>
+                            <div class="newsletter-message newsletter-error">Please enter a valid email address.</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Royal Elegance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Light/Dark Mode Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            if (document.body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+            
+            // Update particle colors when theme changes
+            particles.forEach(particle => {
+                particle.color = document.body.classList.contains('light-mode') ? '#388e3c' : '#8bc34a';
+            });
+            
+            // Dispatch custom event for theme change
+            document.body.dispatchEvent(new CustomEvent('themeChanged'));
+        });
+
+        // NEW: Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+            
+            // Check for scroll master achievement
+            if (scrollPercent > 95 && !achievements.scrollMaster.unlocked) {
+                unlockAchievement('scrollMaster');
+            }
+        });
+
+        // NEW: Achievement System
+        const achievements = {
+            artConnoisseur: {
+                unlocked: false,
+                title: 'Art Connoisseur',
+                description: 'View all gallery items',
+                icon: 'fa-eye'
+            },
+            royalExplorer: {
+                unlocked: false,
+                title: 'Royal Explorer',
+                description: 'Click on 5 pearls',
+                icon: 'fa-crown',
+                count: 0,
+                required: 5
+            },
+            scrollMaster: {
+                unlocked: false,
+                title: 'Scroll Master',
+                description: 'Scroll to the bottom of the page',
+                icon: 'fa-scroll'
+            }
+        };
+
+        let pearlClickCount = 0;
+
+        // Function to unlock achievements
+        function unlockAchievement(achievementKey) {
+            if (!achievements[achievementKey].unlocked) {
+                achievements[achievementKey].unlocked = true;
+                
+                // Update UI
+                const badgeItem = document.querySelector(`.badge-item:nth-child(${getAchievementIndex(achievementKey) + 1})`);
+                badgeItem.classList.remove('locked');
+                badgeItem.classList.add('unlocked');
+                badgeItem.querySelector('.badge-status i').className = 'fas fa-check';
+                
+                // Update badge count
+                const unlockedCount = Object.values(achievements).filter(a => a.unlocked).length;
+                document.querySelector('.badge-count').textContent = unlockedCount;
+                
+                // Show toast notification
+                showAchievementToast(achievements[achievementKey].title);
+                
+                // Save to localStorage
+                saveAchievements();
+            }
+        }
+
+        function getAchievementIndex(key) {
+            const keys = Object.keys(achievements);
+            return keys.indexOf(key);
+        }
+
+        function showAchievementToast(title) {
+            const toast = document.querySelector('.achievement-toast');
+            toast.querySelector('h4').textContent = 'Achievement Unlocked!';
+            toast.querySelector('p').textContent = `You've unlocked: ${title}`;
+            
+            toast.classList.add('active');
+            
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 5000);
+        }
+
+        function saveAchievements() {
+            const achievementData = {};
+            Object.keys(achievements).forEach(key => {
+                achievementData[key] = achievements[key].unlocked;
+            });
+            localStorage.setItem('achievements', JSON.stringify(achievementData));
+        }
+
+        function loadAchievements() {
+            const savedAchievements = localStorage.getItem('achievements');
+            if (savedAchievements) {
+                const achievementData = JSON.parse(savedAchievements);
+                Object.keys(achievementData).forEach(key => {
+                    if (achievementData[key] && achievements[key]) {
+                        unlockAchievement(key);
+                    }
+                });
+            }
+        }
+
+        // NEW: Toggle badges panel
+        document.querySelector('.achievement-badge').addEventListener('click', () => {
+            document.querySelector('.badges-panel').classList.toggle('active');
+        });
+
+        // NEW: Interactive Pearls
+        document.querySelectorAll('.pearl').forEach(pearl => {
+            pearl.addEventListener('click', () => {
+                // Show modal with pearl content
+                const modal = document.querySelector('.pearl-modal');
+                const content = pearl.getAttribute('data-content');
+                
+                modal.querySelector('p').textContent = content;
+                modal.classList.add('active');
+                
+                // Track pearl clicks for achievement
+                pearlClickCount++;
+                if (pearlClickCount >= achievements.royalExplorer.required && !achievements.royalExplorer.unlocked) {
+                    unlockAchievement('royalExplorer');
+                }
+            });
+        });
+
+        // NEW: Close modal
+        document.querySelector('.modal-close').addEventListener('click', () => {
+            document.querySelector('.pearl-modal').classList.remove('active');
+        });
+
+        // NEW: Gallery item viewed tracking
+        let viewedItems = new Set();
+        
+        function trackGalleryView(item) {
+            viewedItems.add(item);
+            if (viewedItems.size >= 3 && !achievements.artConnoisseur.unlocked) {
+                unlockAchievement('artConnoisseur');
+            }
+        }
+
+        // Scroll-triggered Animations with Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Track gallery items for achievement
+                    if (entry.target.classList.contains('gallery-item')) {
+                        const index = Array.from(document.querySelectorAll('.gallery-item')).indexOf(entry.target);
+                        trackGalleryView(index);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Observe gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Observe royal crest
+        const crest = document.querySelector('.crest');
+        observer.observe(crest);
+
+        // Observe Instagram posts
+        document.querySelectorAll('.instagram-post').forEach(post => {
+            observer.observe(post);
+        });
+
+        // Parallax Scrolling Effect
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            
+            // Apply parallax effect to hero background
+            const heroBefore = document.querySelector('.hero::before');
+            if (heroBefore) {
+                heroBefore.style.transform = `translateY(${scrollY * 0.5}px)`;
+            }
+            
+            // Apply parallax effect to features background
+            const features = document.querySelector('.features');
+            if (features) {
+                features.style.backgroundPositionY = `${scrollY * 0.4}px`;
+            }
+            
+            // Apply parallax effect to gallery background
+            const gallery = document.querySelector('.gallery');
+            if (gallery) {
+                gallery.style.backgroundPositionY = `${scrollY * 0.4}px`;
+            }
+            
+            // Apply parallax effect to royal crest background
+            const royalCrest = document.querySelector('.royal-crest');
+            if (royalCrest) {
+                royalCrest.style.backgroundPositionY = `${scrollY * 0.4}px`;
+            }
+            
+            // Show/hide scroll-to-top button
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (scrollY > 500) {
+                scrollButton.classList.add('visible');
+            } else {
+                scrollButton.classList.remove('visible');
+            }
+        });
+
+        // Expandable Footer Widgets
+        document.querySelectorAll('.widget-title').forEach(title => {
+            title.addEventListener('click', () => {
+                title.classList.toggle('active');
+                title.nextElementSibling.classList.toggle('active');
+            });
+        });
+
+        // Newsletter Form Validation
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = newsletterForm.querySelector('.newsletter-input');
+                const successMessage = newsletterForm.querySelector('.newsletter-success');
+                const errorMessage = newsletterForm.querySelector('.newsletter-error');
+                
+                // Simple email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (emailRegex.test(emailInput.value)) {
+                    // Success
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    emailInput.value = '';
+                    
+                    // Hide success message after 3 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 3000);
+                } else {
+                    // Error
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    
+                    // Hide error message after 3 seconds
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                }
+            });
+        }
+
+        // Scroll to top functionality
+        document.querySelector('.scroll-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Particle Effects
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        // Set canvas size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Particle class
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = document.body.classList.contains('light-mode') ? '#388e3c' : '#8bc34a';
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                // Interact with mouse
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    this.speedX -= dx * 0.001;
+                    this.speedY -= dy * 0.001;
+                }
+                
+                // Bounce off walls
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            }
+        }
+
+        // Create particles
+        function createParticles() {
+            particles = [];
+            const particleCount = Math.min(100, Math.floor(window.innerWidth / 10));
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+
+        // Track mouse position
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Update cursor follow effect
+            const cursorFollow = document.querySelector('.cursor-follow');
+            if (cursorFollow) {
+                cursorFollow.style.left = `${e.clientX}px`;
+                cursorFollow.style.top = `${e.clientY}px`;
+            }
+        });
+
+        // Initialize particles and start animation
+        createParticles();
+        animate();
+
+        // Update particle colors when theme changes
+        document.body.addEventListener('themeChanged', () => {
+            particles.forEach(particle => {
+                particle.color = document.body.classList.contains('light-mode') ? '#388e3c' : '#8bc34a';
+            });
+        });
+
+        // Recreate particles on resize
+        window.addEventListener('resize', () => {
+            createParticles();
+        });
+
+        // Enhanced hover effects for feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                this.style.transform = `translateY(-10px) rotate3d(
+                    ${(y / rect.height - 0.5) * 2}, 
+                    ${-(x / rect.width - 0.5) * 2}, 
+                    0, 
+                    3deg
+                )`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-10px)';
+                
+                // Reset after a short delay
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 500);
+            });
+        });
+
+        // Load achievements on page load
+        window.addEventListener('load', () => {
+            loadAchievements();
+        });
+    </script>
+</body>
+</html>
