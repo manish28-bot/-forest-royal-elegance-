@@ -4,7 +4,7 @@
 title: Forest Royal Elegance
 description: A beautiful, interactive website with nature-inspired royal elegance theme
 baseurl: "/forest-royal-elegance" # the subpath of your site, e.g. /blog
-url: "https://your-username.github.io" # the base hostname & protocol for your site
+url: "https://fre.github.io" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
@@ -22,4 +22,4 @@ plugins: []
 
 # Custom variables
 name: "Forest Royal Elegance"
-github_username: "your-username"
+github_username: "manish28-bot"
